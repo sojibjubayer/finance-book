@@ -9,13 +9,13 @@ const Home = () => {
       <h2 className="md:w-[50%] mx-auto text-center border-b-2 text-xl mt-4 mb-6 md:mb-10 text-[#58dede] font-semibold">
         Welcome to Your Finance Dashboard
       </h2>
-      <div className="flex flex-col md:flex-row gap-10">
+      <div className="flex flex-col md:flex-row gap-10 ">
         <Summary />
         <IncomeExpenseChart  />
       </div>
-      <div className="flex flex-col md:flex-row justify-center gap-4 md:gap-10 my-4">
-        <Link className="flex-1 bg-[#D3F5F5] p-2 rounded-md flex justify-center" href="/add-transaction">Add Transaction</Link>
-        <Link className="flex-1 bg-[#D3F5F5] p-2 rounded-md flex justify-center" href="/add-transaction">See Transaction List</Link>
+      <div className="flex flex-col md:w-[70%] mx-auto justify-center gap-4 my-4 px-2">
+        <Link className="flex-1 bg-[#f3e673] p-2 rounded-md flex justify-center" href="/add-transaction">Add Transaction</Link>
+        <Link className="flex-1 bg-[#bdf155] p-2 rounded-md flex justify-center" href="/add-transaction">See Transaction List</Link>
       </div>
     </div>
   );

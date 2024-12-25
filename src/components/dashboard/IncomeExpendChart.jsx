@@ -44,8 +44,8 @@ const IncomeExpenseChart = () => {
       {
         label: 'Spending',
         data: data.spendingValues,
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: '#FECACA',
+        borderColor: '#F87171',
         borderWidth: 1,
       },
     ],
@@ -90,7 +90,7 @@ const IncomeExpenseChart = () => {
   };
 
   return (
-    <div className="flex-1 md:mr-5">
+    <div className="flex-1 md:mr-5 md:h-[350px]  px-1 md:px-0">
       <h2 className="text-base md:text-xl font-semibold mb-4 text-center">Income and Spending Chart</h2>
       <div className="relative lg:h-[500px] " >
         <Bar
