@@ -90,10 +90,11 @@ const IncomeExpenseChart = () => {
   };
 
   return (
-    <div className="flex-1 md:mr-5 md:h-[350px]  px-1 md:px-0">
+    <div className="flex-1 md:mr-5  px-1 md:px-0">
       <h2 className="text-base md:text-xl font-semibold mb-4 text-center">Income and Spending Chart</h2>
-      <div className="relative lg:h-[500px] " >
-        <Bar
+      <div  className=" md:h-full w-full ">
+      {/* <div  > */}
+        <Bar 
           data={chartData}
           options={options}
         />

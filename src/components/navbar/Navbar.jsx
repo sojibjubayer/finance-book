@@ -31,7 +31,7 @@ const Navbar = () => {
   }, [pathname]);
   return (
     <div>
-      <div className="hidden md:flex justify-between items-center h-14 bg-[#E0AFFE] px-4">
+      <div className="hidden md:flex justify-between items-center h-14 bg-[#FFEB3B] px-4">
         <div>Logo</div>
         <div>
           <ul className="flex justify-center items-center gap-20">
@@ -72,7 +72,7 @@ const Navbar = () => {
       <div>
         {/* FOR MOBILE VIEW  */}
         <div className="md:hidden ">
-          <div className="bg-[#E0AFFE] h-12 flex  items-center text-center px-2">
+          <div className="bg-[#FFEB3B] h-12 flex  items-center text-center px-2">
             <div
               onClick={() => setOpen(!open)}
               className="lg:hidden btn btn-ghost "
