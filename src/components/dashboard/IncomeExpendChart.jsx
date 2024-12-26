@@ -10,6 +10,7 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 const IncomeExpenseChart = () => {
   const { data: session } = useSession();
   const { data: getData, isLoading, isError } = useGetTransactionQuery(session?.user?.email);
+  console.log(session?.user.email)
 
   // Predefined categories
   const categories = ["Salary", "Food", "Rent", "Entertainment", "Other"];
