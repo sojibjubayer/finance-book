@@ -12,7 +12,7 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setError(null); // Reset error state before a new login attempt
+    setError(null); 
 
     const email = event.target.email.value;
     const password = event.target.password.value;
