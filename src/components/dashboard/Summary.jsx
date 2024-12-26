@@ -6,6 +6,7 @@ import React from "react";
 const Summary = () => {
   const { data: session } = useSession();
   const { data, isLoading, isError } = useGetTransactionQuery(session?.user?.email);
+  
 
   // Calculate totals
   const transactions = data?.transactions || [];
