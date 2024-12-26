@@ -13,7 +13,7 @@ const Home = () => {
         <Summary />
         <IncomeExpenseChart  />
       </div>
-      <div className="flex flex-col md:w-[70%] mx-auto justify-center gap-4 my-6 px-2">
+      <div className="flex flex-col md:w-[60%] mx-auto justify-center gap-4 my-6 px-2">
         <Link className="text-center bg-[#FF9800] p-2 rounded-md " href="/add-transaction">Add Transaction</Link>
         <Link className="text-center bg-[#FF6347] p-2 rounded-md "  href="/see-transaction" >See Transaction List</Link>
       </div>
