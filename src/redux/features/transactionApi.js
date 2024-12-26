@@ -13,7 +13,7 @@ export const transactionApi=createApi({
         }),
         // getSIngleUser by id
         getTransaction: builder.query({
-            query: (id) => `/api/transactions/${id}`,
+            query: (email) => `/api/getTransaction/${email}`,
             providesTags:['Transaction']
         }),
         // CREATE 

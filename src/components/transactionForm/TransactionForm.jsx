@@ -1,6 +1,7 @@
 "use client"
 import { useAddTransactionMutation } from "@/redux/features/transactionApi";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -13,6 +14,7 @@ const TransactionForm = () => {
     category: "salary", 
     email:session?.user?.email || ''
   });
+  const router = useRouter();
 
   // Handle input change
   const handleChange = (e) => {
@@ -32,6 +34,7 @@ const TransactionForm = () => {
     }
     await addTransaction(formData)
     toast.success('Transaction added successfully!')
+    router.push('/')
 
     
   };
