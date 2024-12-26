@@ -13,8 +13,8 @@ const handler = NextAuth({
   providers: [
     CredentialsProvider({
       credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
+        email: {  },
+        password: {  },
       },
       async authorize(credentials) {
         const { email, password } = credentials;
@@ -42,7 +42,7 @@ const handler = NextAuth({
           id: currentUser._id,
           name: currentUser.name,
           email: currentUser.email,
-          role: currentUser.role || "user", // Include role if available
+          role: currentUser.role || "user", 
         };
       },
     }),

@@ -8,18 +8,18 @@ export const transactionApi=createApi({
     tagTypes:['Transaction'],
     endpoints: (builder) => ({
         getTransactions: builder.query({
-            query: () => '/transactions',
+            query: () => '/api/transactions',
             providesTags:['transaction']
         }),
         // getSIngleUser by id
         getTransaction: builder.query({
-            query: (id) => `/transactions/${id}`,
+            query: (id) => `/api/transactions/${id}`,
             providesTags:['Transaction']
         }),
         // CREATE 
         addTransaction: builder.mutation({
             query: (transaction) => ({
-                url: '/transactions',
+                url: '/api/addTransaction',
                 method:'POST',
                 body:transaction
             }),
@@ -29,7 +29,7 @@ export const transactionApi=createApi({
         // UPDATE 
         updateTransaction: builder.mutation({
             query: (transaction) => ({
-                url: `/transactions/${transaction.id}`,
+                url: `/api/updateTransaction/${transaction.id}`,
                 method:'PUT',
                 body:user
             }),
@@ -38,7 +38,7 @@ export const transactionApi=createApi({
         // DELETE
         deleteTransaction: builder.mutation({
             query: (id) => ({
-                url: `/transactions/${id}`,
+                url: `/api/deleteTransaction/${id}`,
                 method:'DELETE',
             }),
             invalidatesTags:['Transaction']

@@ -1,16 +1,17 @@
 "use client";
+import { useSession, signOut } from "next-auth/react"; 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { IoMenu, IoCloseCircleSharp } from "react-icons/io5";
-// import dynamic from 'next/dynamic';
 
 const Navbar = () => {
-  const pathname = usePathname();
-  const [open, setOpen] = useState(false);
-  const menuRef = useRef(null);
+  const { data: session } = useSession(); 
+  const pathname = usePathname(); 
+  const [open, setOpen] = useState(false); 
+  const menuRef = useRef(null); 
 
-  // Handle click outside of the menu
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -24,11 +25,20 @@ const Navbar = () => {
   }, []);
 
   const handleClickLink = () => {
-    setOpen(false);
+    setOpen(false); 
   };
+
   useEffect(() => {
-    setOpen(false);
+    setOpen(false); 
   }, [pathname]);
+
+  
+  const handleLogout = () => {
+    signOut({
+      callbackUrl: "/login", 
+    });
+  };
+
   return (
     <div>
       <div className="hidden md:flex justify-between items-center h-14 bg-[#FFEB3B] px-4">
@@ -40,7 +50,7 @@ const Navbar = () => {
                 href="/"
                 className={`${
                   pathname === "/" ? "bg-white rounded" : ""
-                } px-4 py-2  hover:border-b-2 border-white`}
+                } px-4 py-2 hover:border-b-2 border-white`}
               >
                 Dashboard
               </Link>
@@ -67,68 +77,89 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <div><Link href="/login" className="border border-white rounded-md p-1">Login</Link></div>
-      </div>
-      <div>
-        {/* FOR MOBILE VIEW  */}
-        <div className="md:hidden ">
-          <div className="bg-[#FFEB3B] h-12 flex  items-center text-center px-2">
-            <div
-              onClick={() => setOpen(!open)}
-              className="lg:hidden btn btn-ghost "
+        <div>
+          {session?.user?.email ? (
+            <button
+              onClick={handleLogout} 
+              className="border border-white rounded-md p-1"
             >
-              {open ? (
-                <IoCloseCircleSharp className="text-2xl" />
-              ) : (
-                <IoMenu className="text-2xl" />
-              )}
-            </div>
-            <Link href="/" className=" text-lg  font-bold ml-14">
-              Finance Tracker
+              Logout
+            </button>
+          ) : (
+            <Link
+              href="/login"
+              className="border border-white rounded-md p-1"
+            >
+              Login
             </Link>
-          </div>
+          )}
+        </div>
+      </div>
 
-          <ul
-            ref={menuRef}
-            className={` ${
-              open ? "top-12 -left-1" : "top-12 -left-60"
-            } duration-1000 absolute text-black menu-sm ml-2 z-[1] p-2 bg-[#E0AFFE] space-y-5 w-44 py-4 rounded-sm border border-green-500`}
-          >
-            <li>
-              <Link
-                href="/"
+      {/* MOBILE VIEW */}
+      <div className="md:hidden">
+        <div className="bg-[#FFEB3B] h-12 flex items-center text-center px-2">
+          <div onClick={() => setOpen(!open)} className="lg:hidden btn btn-ghost">
+            {open ? (
+              <IoCloseCircleSharp className="text-2xl" />
+            ) : (
+              <IoMenu className="text-2xl" />
+            )}
+          </div>
+          <Link href="/" className=" text-lg font-bold ml-14">
+            Finance Tracker
+          </Link>
+        </div>
+
+        <ul
+          ref={menuRef}
+          className={`${
+            open ? "top-12 -left-1" : "top-12 -left-60"
+          } duration-1000 absolute text-black menu-sm ml-2 z-[1] p-2 bg-[#E0AFFE] space-y-5 w-44 py-4 rounded-sm border border-green-500`}
+        >
+          <li>
+            <Link
+              href="/"
+              className="border border-white px-2 py-1 rounded-md hover:bg-white"
+              onClick={handleClickLink}
+            >
+              Dashboard
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/set-budget"
+              className="border border-white px-2 py-1 rounded-md hover:bg-white"
+            >
+              Set Budget
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/expense-insights"
+              className="border border-white px-2 py-1 rounded-md hover:bg-white"
+            >
+              Expense Insights
+            </Link>
+          </li>
+          <li>
+            {session?.user?.email ? (
+              <button
+                onClick={handleLogout} 
                 className="border border-white px-2 py-1 rounded-md hover:bg-white"
-                onClick={handleClickLink}
               >
-                Dashboard
-              </Link>
-            </li>
-            <li>
+                Logout
+              </button>
+            ) : (
               <Link
-                href="/set-budget"
-                className="border border-white px-2 py-1 rounded-md hover:bg-white"
-              >
-                Set Budget
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/expense-insights"
-                className="border border-white px-2 py-1 rounded-md hover:bg-white"
-              >
-                Expense Insights
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#"
+                href="/login"
                 className="border border-white px-2 py-1 rounded-md hover:bg-white"
               >
                 Login
               </Link>
-            </li>
-          </ul>
-        </div>
+            )}
+          </li>
+        </ul>
       </div>
     </div>
   );

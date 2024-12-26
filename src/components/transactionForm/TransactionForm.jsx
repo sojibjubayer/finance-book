@@ -1,12 +1,17 @@
 "use client"
+import { useAddTransactionMutation } from "@/redux/features/transactionApi";
+import { useSession } from "next-auth/react";
 import React, { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 const TransactionForm = () => {
+  const {data:session} = useSession()
   const [formData, setFormData] = useState({
     type: "income", 
     amount: "",
     currency: "USD", 
     category: "salary", 
+    email:session?.user?.email || ''
   });
 
   // Handle input change
@@ -18,15 +23,17 @@ const TransactionForm = () => {
     }));
   };
 
-
-  const handleSubmit = (e) => {
+  const [addTransaction] = useAddTransactionMutation()
+  const handleSubmit = async(e) => {
     e.preventDefault();
     if (!formData.amount || !formData.currency) {
       alert("Please fill in all fields.");
       return;
     }
+    await addTransaction(formData)
+    toast.success('Transaction added successfully!')
 
-    // console.log(formData);
+    
   };
 
   return (
@@ -124,6 +131,7 @@ const TransactionForm = () => {
           </button>
         </div>
       </form>
+      <Toaster />
     </div>
   );
 };
