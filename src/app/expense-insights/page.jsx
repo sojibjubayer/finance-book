@@ -2,7 +2,7 @@ import React from 'react';
 
 const ExpenseInsight = () => {
     return (
-        <div>
+        <div className='h-screen'>
             Expense Insight
         </div>
     );

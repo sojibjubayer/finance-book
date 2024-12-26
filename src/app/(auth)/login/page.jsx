@@ -1,13 +1,12 @@
 "use client";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
-  const searchParams = useSearchParams();
-  const path = searchParams.get("redirect");
+  const router = useRouter();
   const [error, setError] = useState(null);
   const [loading,setLoading]=useState(false);
 
@@ -32,7 +31,7 @@ const Login = () => {
       toast.success('Successfully Logged In');
       // Redirect to the callback URL or home page
       setTimeout(() => {
-        window.location.href = path || "/";
+       router.push('/');
       }, 2000);
     }
   };
