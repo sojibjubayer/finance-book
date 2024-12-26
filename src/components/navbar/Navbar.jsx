@@ -67,7 +67,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <div>Login</div>
+        <div><Link href="/login" className="border border-white rounded-md p-1">Login</Link></div>
       </div>
       <div>
         {/* FOR MOBILE VIEW  */}
