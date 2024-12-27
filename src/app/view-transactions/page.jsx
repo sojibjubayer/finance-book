@@ -15,7 +15,7 @@ const ViewTransactions = () => {
     return <h3 className="min-h-screen">Loading data...</h3>
 
   return (
-    <div className="md:w-[50%] mx-auto space-y-4 my-5 px-2">
+    <div className="md:w-[50%] mx-auto space-y-4 mt-5 mb-20 px-2">
         <h2 className="text-center font-semibold">Transaction List</h2>
       {transactions?.slice().reverse().map((transaction) => (
         <div key={transaction._id} className="border shadow-md p-4 ">

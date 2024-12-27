@@ -8,44 +8,39 @@ import { useRouter, useSearchParams } from "next/navigation";
 const Login = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
   const searchParams = useSearchParams();
-
-  // Get the 'redirect' query parameter from the URL, default to '/' if not provided
   const redirectUrl = searchParams.get("redirect") || "/";
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setError(null); // Clear any previous errors
-    setLoading(true); // Start loading state
+    setError(null); 
+    setLoading(true); 
 
     const email = event.target.email.value;
     const password = event.target.password.value;
 
     try {
-      // Attempt sign in with credentials
       const resp = await signIn("credentials", {
         email,
         password,
-        redirect: false, // Disable automatic redirection from NextAuth
+        redirect: false, 
       });
 
-      setLoading(false); // Reset loading state
+      setLoading(false); 
 
       if (resp?.error) {
-        // Display error if login fails
         setError(resp.error);
+        toast.error(resp.error); 
       } else if (resp?.ok) {
-        // Show success message and redirect after 2 seconds
         toast.success("Successfully Logged In");
-        
-          // Navigate to the redirect URL or default to '/'
-          router.push('/');
-      
+        setTimeout(() => {
+          window.location.href = redirectUrl;
+        }, 1000);
       }
     } catch (error) {
-      setLoading(false); // Reset loading state in case of error
-      setError("An error occurred during login."); // Fallback error message
+      setLoading(false); 
+      setError("An error occurred during login."); 
+      toast.error("An error occurred during login."); 
     }
   };
 
@@ -88,7 +83,7 @@ const Login = () => {
           <button
             type="submit"
             className="w-full bg-yellow-400 hover:bg-yellow-500 text-white font-medium py-2 rounded-md focus:ring-2 focus:ring-yellow-300 focus:outline-none transition"
-            disabled={loading} // Disable button while loading
+            disabled={loading} 
           >
             {loading ? "Logging in ..." : "Login"}
           </button>
