@@ -6,6 +6,7 @@ import Footer from "@/components/footer/Footer";
 import AuthProvider from "@/services/AuthProvider";
 import { Provider } from "react-redux";
 import store from "@/redux/store/store";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={inter.className}>
+        <Suspense fallback={<div>Loading...</div>}>
         <AuthProvider>
           <Provider store={store}>
             <Navbar />
@@ -28,6 +30,7 @@ export default function RootLayout({ children }) {
             <Footer />
           </Provider>
         </AuthProvider>
+        </Suspense>
       </body>
     </html>
   );
