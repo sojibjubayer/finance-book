@@ -14,9 +14,9 @@ const Home = () => {
         <Summary />
         <IncomeExpenseChart  />
       </div>
-      <div className="flex flex-col md:w-[60%] mx-auto justify-center gap-4 my-6 px-2">
-        <Link className="text-center bg-[#FF9800] p-2 rounded-md " href="/add-transaction">Add Transaction</Link>
-        <Link className="text-center bg-[#FF6347] p-2 rounded-md "  href="/see-transaction" >See Transaction List</Link>
+      <div className="flex flex-col md:w-[50%] mx-auto justify-center gap-4 mt-5 mb-10 px-2">
+        <Link className="text-center bg-[#FCFFC1] hover:bg-[#FFE893] py-4 rounded-md "  href="/view-transactions" >View Transactions </Link>
+        <Link className="text-center bg-[#B1F0F7] hover:bg-[#81BFDA] py-4 rounded-md " href="/add-transaction">Add Transaction</Link>
       </div>
       
     </div>
