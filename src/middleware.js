@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export const middleware = async (request) => {
   // Extract the session token from cookies
-  const token = cookies(request).get("__Secure-next-auth.session-token");
+  const token = cookies(request).get("next-auth.session-token");
 
   // Get the current path of the request
   const pathname = request.nextUrl.pathname;
