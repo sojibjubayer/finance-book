@@ -31,7 +31,7 @@ export const transactionApi=createApi({
             query: (transaction) => ({
                 url: `/api/updateTransaction/${transaction.id}`,
                 method:'PUT',
-                body:user
+                body:transaction
             }),
             invalidatesTags:['Transaction']
         }),

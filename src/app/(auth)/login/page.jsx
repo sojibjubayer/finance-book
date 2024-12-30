@@ -16,7 +16,7 @@ const Login = () => {
     setError(null); 
     setLoading(true); 
 
-    const email = event.target.email.value;
+    const email = event.target.email.value.toLowerCase();
     const password = event.target.password.value;
 
     try {
