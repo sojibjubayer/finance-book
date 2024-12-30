@@ -50,7 +50,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="px-4 py-6 md:w-[40%] md:mx-auto mx-2 bg-gray-50 shadow-md rounded-md mt-10 mb-20 ">
+    <div className="min-h-screen px-4 py-6 md:w-[40%] md:mx-auto mx-2 bg-gray-50 shadow-md rounded-md mt-10 mb-20 ">
       <form onSubmit={handleSubmit} className="space-y-6 ">
         <h2 className="text-2xl font-semibold text-center text-gray-800">
           Signup

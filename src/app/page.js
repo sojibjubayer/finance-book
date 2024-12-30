@@ -6,7 +6,7 @@ import React from "react";
 const Home = () => {
   
   return (
-    <div className="">
+    <div className="min-h-screen">
       <h2 className="md:w-[50%] mx-auto text-center border-b-2 text-xl mt-4 mb-6 md:mb-10 text-[#58dede] font-semibold">
         Welcome to Your Finance Dashboard
       </h2>
