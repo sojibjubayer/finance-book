@@ -1,22 +1,33 @@
-"use client"
+"use client";
+
 import { useAddTransactionMutation } from "@/redux/features/transactionApi";
+import { useCurrencyConverter } from "@/utils/CurrencyConvertion";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 const TransactionForm = () => {
-  const {data:session} = useSession()
-  const [formData, setFormData] = useState({
-    type: "income", 
-    amount: "",
-    currency: "USD", 
-    category: "salary", 
-    email:session?.user?.email || ''
-  });
+  const { data: session } = useSession();
   const router = useRouter();
+  const { convertCurrency, isLoading, error } = useCurrencyConverter();
 
-  // Handle input change
+  const [formData, setFormData] = useState({
+    type: "income",
+    amount: 0,
+    currency: "USD",
+    category: "salary",
+    email: session?.user?.email || "",
+  });
+
+  const convertedAmount =
+    formData.currency !== "USD"
+      ? convertCurrency(parseFloat(formData.amount), formData.currency, "USD")
+      : parseFloat(formData.amount);
+
+  const [addTransaction] = useAddTransactionMutation();
+
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -25,28 +36,36 @@ const TransactionForm = () => {
     }));
   };
 
-  const [addTransaction] = useAddTransactionMutation()
-  const handleSubmit = async(e) => {
+  // Handle form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!formData.amount || !formData.currency) {
       alert("Please fill in all fields.");
       return;
     }
-    await addTransaction(formData)
-    toast.success('Transaction added successfully!')
-    setTimeout(() => {
-      router.push('/')
-    }, 1000);
 
-    
+    try {
+      const transactionData = {
+        ...formData,
+        amount: convertedAmount.toFixed(2), // Send only the converted amount
+      };
+      await addTransaction(transactionData);
+      toast.success("Transaction added successfully!");
+      setTimeout(() => {
+        router.push("/");
+      }, 1000);
+    } catch (error) {
+      toast.error("Failed to add transaction. Please try again.");
+    }
   };
 
   return (
     <div className="md:w-[50%] mx-auto px-2">
-      <h2 className="md:w-[50%] mx-auto text-center border-b-2 text-xl mt-4 mb-6 md:mb-10 text-[#58dede] font-semibold">
+      <h2 className="text-center border-b-2 text-xl mt-4 mb-6 md:mb-10 text-[#58dede] font-semibold">
         Transaction Form
       </h2>
-      <form onSubmit={handleSubmit} className="my-10 space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         {/* Transaction Type */}
         <div>
           <label htmlFor="type" className="block text-gray-700 mb-2">
@@ -55,7 +74,7 @@ const TransactionForm = () => {
           <select
             name="type"
             id="type"
-            className="border rounded-md p-2 w-full  focus:border-[#58dede] focus:outline-none"
+            className="border rounded-md p-2 w-full focus:border-[#58dede] focus:outline-none"
             value={formData.type}
             onChange={handleChange}
           >
@@ -95,15 +114,17 @@ const TransactionForm = () => {
           >
             <option value="USD">USD</option>
             <option value="EUR">EUR</option>
-            <option value="GBP">BDT</option>
+            <option value="BDT">BDT</option>
             <option value="INR">INR</option>
-            {/* Add other currencies as needed */}
+            {/* Add more currencies as needed */}
           </select>
         </div>
 
         {/* Amount in USD */}
         <div>
-          <p className="text-gray-700 mb-3">Amount in USD: ${formData.amount}</p>
+          <p className="text-gray-700 mb-3 ">
+            Amount in USD: <span className="bg-white shadow-md px-1">${convertedAmount.toFixed(2)}</span> 
+          </p>
         </div>
 
         {/* Category */}
@@ -119,7 +140,7 @@ const TransactionForm = () => {
             onChange={handleChange}
           >
             <option value="salary">Salary</option>
-            <option className="hover:bg-green-400" value="food">Food</option>
+            <option value="food">Food</option>
             <option value="rent">Rent</option>
             <option value="entertainment">Entertainment</option>
             <option value="other">Other</option>
@@ -130,7 +151,7 @@ const TransactionForm = () => {
         <div className="mt-4">
           <button
             type="submit"
-            className="w-full py-2 mt-5 bg-[#58dede] text-white rounded-md hover:bg-[#45b6b6] transition duration-300"
+            className="w-full py-2 my-5 bg-[#58dede] text-white rounded-md hover:bg-[#45b6b6] transition duration-300"
           >
             Submit
           </button>

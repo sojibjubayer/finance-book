@@ -80,7 +80,7 @@ const SetBudget = () => {
 
       <div className="my-4">
         
-        {goalLoading?'Loading...':
+        {goalLoading?'Loading Budget Info...':
         goals?.map((goal) => {
           const progress = Math.min((totalExpenses / goal.goal) * 100, 100); 
 
