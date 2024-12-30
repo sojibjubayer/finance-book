@@ -72,7 +72,7 @@ const ViewTransactions = () => {
   }
 
   return (
-    <div className="relative md:w-[50%] mx-auto space-y-4 mt-5 mb-20 px-2">
+    <div className="min-h-screen relative md:w-[50%] mx-auto space-y-4 mt-5 mb-20 px-2">
       <h2 className="text-center font-semibold">Transaction List</h2>
       {transactions
         .slice()
@@ -146,8 +146,8 @@ const ViewTransactions = () => {
             ) : (
               <div className="flex flex-col md:flex-row gap-2 justify-between items-center">
                 <div>
-                  <span className="font-semibold">{transaction.type}</span>:{" "}
-                  <span className="mr-5">{transaction.amount}</span> -{" "}
+                  <span className="font-semibold">{transaction.type}</span>:
+                  <span className="mr-5">${transaction.amount}</span> -
                   {transaction.category}
                 </div>
                 <div className="flex gap-2">

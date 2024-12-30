@@ -34,7 +34,9 @@ const TransactionForm = () => {
     }
     await addTransaction(formData)
     toast.success('Transaction added successfully!')
-    router.push('/')
+    setTimeout(() => {
+      router.push('/')
+    }, 1000);
 
     
   };
