@@ -62,7 +62,7 @@ const Navbar = () => {
               <Link
                 href="/view-transactions"
                 className={`${
-                  pathname === "/view-transactions" ? "border-b-2 border-gray-50" : ""
+                  pathname === "/view-transactions" ? "bg-white rounded-md" : ""
                 } px-4 py-2 `}
               >
                 Transactions
