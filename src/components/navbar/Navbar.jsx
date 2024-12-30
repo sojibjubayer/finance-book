@@ -60,6 +60,16 @@ const Navbar = () => {
             </li>
             <li>
               <Link
+                href="/view-transactions"
+                className={`${
+                  pathname === "/view-transactions" ? "border-b-2 border-gray-50" : ""
+                } px-4 py-2 `}
+              >
+                Transactions
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/set-budget"
                 className={`${
                   pathname === "/set-budget" ? "bg-white rounded-md" : ""
@@ -129,6 +139,17 @@ const Navbar = () => {
                 } px-4 py-2 `}
               >
                 Dashboard
+              </Link>
+            </li>
+
+           <li>
+              <Link
+                href="/view-transactions"
+                className={`${
+                  pathname === "/view-transactions" ? "border-b-2 border-gray-50" : ""
+                } px-4 py-2 `}
+              >
+                Transactions
               </Link>
             </li>
             <li>
