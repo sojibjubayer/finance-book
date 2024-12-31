@@ -32,21 +32,21 @@ const Login = () => {
         setError(resp.error);
         toast.error(resp.error);
       } else if (resp?.ok) {
-        toast.success("Successfully Logged In");
+        toast.success("Successfully logged in!");
         setTimeout(() => {
           window.location.href = redirectUrl;
         }, 1000);
       }
     } catch (error) {
       setLoading(false);
-      setError("An error occurred during login.");
-      toast.error("An error occurred during login.");
+      setError("An error occurred during login. Please try again.");
+      toast.error("An error occurred during login. Please try again.");
     }
   };
 
   return (
-    <div className="min-h-screen">
-      <div className=" px-4 py-6 md:w-[40%] md:mx-auto mx-2 bg-gray-50 shadow-md rounded-md mt-10 mb-20">
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="px-6 py-8 md:w-[40%] w-full bg-white shadow-md rounded-md mt-10 mb-20">
         <form onSubmit={handleSubmit} className="space-y-6">
           <h2 className="text-2xl font-semibold text-center text-gray-800">
             Login
@@ -88,14 +88,14 @@ const Login = () => {
               className="w-full bg-yellow-400 hover:bg-yellow-500 text-white font-medium py-2 rounded-md focus:ring-2 focus:ring-yellow-300 focus:outline-none transition"
               disabled={loading}
             >
-              {loading ? "Logging in ..." : "Login"}
+              {loading ? "Logging in..." : "Login"}
             </button>
           </div>
 
           <div className="text-center text-sm">
-            New Here? Please{" "}
+            New here?
             <Link href="/signup" className="text-blue-600 font-semibold">
-              Signup here
+              Sign up here
             </Link>
           </div>
         </form>
